@@ -36,6 +36,17 @@ window.loadMap = function (data) {
                     'type': 'Point',
                     'coordinates': [-63.292236, -18.281518]
                 }
+            },
+            {
+                'type': 'Feature',
+                'properties': {
+                    'message': 'Baz',
+                    'iconSize': [40, 40]
+                },
+                'geometry': {
+                    'type': 'Point',
+                    'coordinates': [94.90412,21.16295]
+                }
             }
         ]
     };
