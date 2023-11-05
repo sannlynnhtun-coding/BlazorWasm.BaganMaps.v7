@@ -1,11 +1,11 @@
 ﻿namespace BlazorWasm.Maps.Models
 {
-    public class BaganMapInfoModel
+    public class BaganMapInfoHeadModel
     {
         public string Id { get; set; }
         public string PagodaMmName { get; set; }
         public string PagodaEngName { get; set; }
-        public decimal Latitude { get; set; }
-        public decimal Longitude { get; set; }
+        public float Latitude { get; set; }
+        public float Longitude { get; set; }
     }
 }
