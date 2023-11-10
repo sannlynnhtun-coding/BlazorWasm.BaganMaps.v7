@@ -7,8 +7,13 @@
     <title>BlazorWasm.Maps</title>
     <base href="/" />
 
-    
-<link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet">
+    <!-- Stylesheets -->
+
+    <link href="_content/MudBlazor/MudBlazor.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="theme/css/vendors.css">
+    <link rel="stylesheet" href="theme/css/main.css">
     <link href="app.css" rel="stylesheet" />
 
     <link rel="icon" type="image/png" href="favicon.png" />
@@ -18,12 +23,13 @@
 </head>
 
 <body>
+
     <div id="app">
-        <svg class="loading-progress">
-            <circle r="40%" cx="50%" cy="50%" />
-            <circle r="40%" cx="50%" cy="50%" />
-        </svg>
-        <div class="loading-progress-text"></div>
+        <!--  <svg class="loading-progress">
+             <circle r="40%" cx="50%" cy="50%" />
+             <circle r="40%" cx="50%" cy="50%" />
+         </svg>
+         <div class="loading-progress-text"></div> -->
     </div>
 
     <div id="blazor-error-ui">
@@ -34,8 +40,11 @@
     <script src="_framework/blazor.webassembly.js"></script>
     <script>navigator.serviceWorker.register('service-worker.js');</script>
     <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkUOdZ5y7hMm0yrcCQoCvLwzdM6M8s5qk"></script> -->
-    <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
-    <script async defer src="js/custom.js"></script>
+    <script defer src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
+
+    <script src="_content/MudBlazor/MudBlazor.min.js"></script>
+
+    <script src="js/custom.js"></script>
 </body>
 
 </html>
