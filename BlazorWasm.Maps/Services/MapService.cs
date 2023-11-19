@@ -16,6 +16,39 @@ namespace BlazorWasm.Maps.Services
 
         public List<BaganMapInfoDetailModel> BaganMapInfoDetail => Get().BaganMapInfoDetail;
 
+        public List<TravelRouteModel> TravelRouteList()
+        {
+
+
+            var dayOne = new List<string> { "26", "47", "19", "15", "29", "24", "7", "9", "11", "14", "30", "37", "10", "41", "48", "12", "13", "43", "42", "8", "40", "23", "36", "34", "5" };
+
+            List<TravelRouteModel> travelRoutes = new List<TravelRouteModel>();
+
+            var dayOneRouteData = new TravelRouteModel();
+            dayOneRouteData.TravelRouteId = Guid.NewGuid().ToString();
+            dayOneRouteData.TravelRouteDescription = "မနက် ၈ နာရီမှာ ခရီးစထွက်ပြီးနောက် နေ့လည်ထမင်းစားနားချိန် ၁၂ နာရီဝန်းကျင် ပုဂံပြတိုက်နားမှာသုံးဆောင်ခါ ခဏတာအပန်းဖြေပြီး ထို့နောက်ပုဂံပြတိုက်ကနေစတင်ခရီးဆက်ပြီး ပြတိုက်အတွင်း၌ နားနားနေနေလည်ပတ်ပြီးနောက် ၂ နာရီဝန်းကျင်ပြန်လည်ထွက်ခွာပြီး အဆုံးမှာတော့ စူဠာမဏိစေတီ၌ ညနေခင်းနေဝင်ချိန်ကြည့်ပြီး အလှဓာတ်ပုံများရိုက်ခါ တစ်နေ့တာအတွက်နားဖို့အချိန်ကျပါပီ";
+            dayOneRouteData.PagodaList = BaganMapInfo.Where(x => dayOne.Contains(x.Id)).ToList();
+
+            travelRoutes.Add(dayOneRouteData);
+
+            var dayTwo = new List<string> { "4", "38", "33", "39", "2", "46", "3", "49", "51", "35", "6", "22", "25", "20", "16", "17", "27", "18", "44", "31", "32", "45", "21" };
+
+            var dayTwoRouteData = new TravelRouteModel();
+            dayTwoRouteData.TravelRouteId = Guid.NewGuid().ToString();
+            dayTwoRouteData.TravelRouteDescription = "မနက် ၈ နာရီမှာ ခရီးစထွက်ပြီးနောက် နေ့လည်ထမင်းစားနားချိန် ၁၂ နာရီဝန်းကျင် မင်္ဂလာစေတီဘုရားနားမှာသုံးဆောင်ခါ ခဏတာအပန်းဖြေပြီး ထို့နောက်ဂူပြောက်ကြီးဘုရားကနေစတင်ခရီးဆက်ပြီး ဂူအတွင်း၌ နားနားနေနေလည်ပတ်ပြီးနောက် ၂ နာရီဝန်းကျင်ပြန်လည်ထွက်ခွာပြီး အဆုံးမှာတော့ စိမ်းညှက်ညီမဘုရား၌ တနေ့တာကုန်ဆုံးခါ ညနေခင်းနေဝင်ချိန်ကြည့်ပြီး အလှဓာတ်ပုံများရိုက်ခါခရီးစဥ်ပြီးဆုံးပါပီ";
+            dayTwoRouteData.PagodaList = BaganMapInfo.Where(x => dayTwo.Contains(x.Id)).ToList();
+
+
+            //foreach (var dayOneRoute in dayOne)
+            //{
+            //    var baganMapInfo = BaganMapInfo.FirstOrDefault(x=>x.Id == dayOneRoute);
+            //    if (baganMapInfo != null)
+            //    {
+
+            //    }
+            //}
+        }
+
         public static string MapData = @"{
   ""BaganMapInfoHead"": [
     {
