@@ -18,8 +18,6 @@ namespace BlazorWasm.Maps.Services
 
         public List<TravelRouteModel> TravelRouteList()
         {
-
-
             var dayOne = new List<string> { "26", "47", "19", "15", "29", "24", "7", "9", "11", "14", "30", "37", "10", "41", "48", "12", "13", "43", "42", "8", "40", "23", "36", "34", "5" };
 
             List<TravelRouteModel> travelRoutes = new List<TravelRouteModel>();
@@ -27,7 +25,14 @@ namespace BlazorWasm.Maps.Services
             var dayOneRouteData = new TravelRouteModel();
             dayOneRouteData.TravelRouteId = Guid.NewGuid().ToString();
             dayOneRouteData.TravelRouteDescription = "မနက် ၈ နာရီမှာ ခရီးစထွက်ပြီးနောက် နေ့လည်ထမင်းစားနားချိန် ၁၂ နာရီဝန်းကျင် ပုဂံပြတိုက်နားမှာသုံးဆောင်ခါ ခဏတာအပန်းဖြေပြီး ထို့နောက်ပုဂံပြတိုက်ကနေစတင်ခရီးဆက်ပြီး ပြတိုက်အတွင်း၌ နားနားနေနေလည်ပတ်ပြီးနောက် ၂ နာရီဝန်းကျင်ပြန်လည်ထွက်ခွာပြီး အဆုံးမှာတော့ စူဠာမဏိစေတီ၌ ညနေခင်းနေဝင်ချိန်ကြည့်ပြီး အလှဓာတ်ပုံများရိုက်ခါ တစ်နေ့တာအတွက်နားဖို့အချိန်ကျပါပီ";
-            dayOneRouteData.PagodaList = BaganMapInfo.Where(x => dayOne.Contains(x.Id)).ToList();
+            //dayOneRouteData.PagodaList = BaganMapInfo.Where(x => dayOne.Contains(x.Id)).ToList();
+            dayOneRouteData.PagodaList = new List<BaganMapInfoModel>();
+
+            foreach (var dayOneRoute in dayOne)
+            {
+                int index = Convert.ToInt32(dayOneRoute) + 2;
+                dayOneRouteData.PagodaList.Add(BaganMapInfo[index]);
+            }
 
             travelRoutes.Add(dayOneRouteData);
 
@@ -38,15 +43,14 @@ namespace BlazorWasm.Maps.Services
             dayTwoRouteData.TravelRouteDescription = "မနက် ၈ နာရီမှာ ခရီးစထွက်ပြီးနောက် နေ့လည်ထမင်းစားနားချိန် ၁၂ နာရီဝန်းကျင် မင်္ဂလာစေတီဘုရားနားမှာသုံးဆောင်ခါ ခဏတာအပန်းဖြေပြီး ထို့နောက်ဂူပြောက်ကြီးဘုရားကနေစတင်ခရီးဆက်ပြီး ဂူအတွင်း၌ နားနားနေနေလည်ပတ်ပြီးနောက် ၂ နာရီဝန်းကျင်ပြန်လည်ထွက်ခွာပြီး အဆုံးမှာတော့ စိမ်းညှက်ညီမဘုရား၌ တနေ့တာကုန်ဆုံးခါ ညနေခင်းနေဝင်ချိန်ကြည့်ပြီး အလှဓာတ်ပုံများရိုက်ခါခရီးစဥ်ပြီးဆုံးပါပီ";
             dayTwoRouteData.PagodaList = BaganMapInfo.Where(x => dayTwo.Contains(x.Id)).ToList();
 
+            foreach (var dayTwoRoute in dayTwo)
+            {
+                int index = Convert.ToInt32(dayTwoRoute) + 2;
+                dayTwoRouteData.PagodaList.Add(BaganMapInfo[index]);
+            }
 
-            //foreach (var dayOneRoute in dayOne)
-            //{
-            //    var baganMapInfo = BaganMapInfo.FirstOrDefault(x=>x.Id == dayOneRoute);
-            //    if (baganMapInfo != null)
-            //    {
-
-            //    }
-            //}
+            travelRoutes.Add(dayTwoRouteData);
+            return travelRoutes;
         }
 
         public static string MapData = @"{
