@@ -50,13 +50,13 @@ window.loadMap = function (data, dotNetHelper) {
     }
 
     map.on('load', function () {
-        let geojsonLatLong1 = [];
-        geojsonLatLong1.push(geojson[0].Longitude);
-        geojsonLatLong1.push(geojson[0].Latitude);
+        //let geojsonLatLong1 = [];
+        //geojsonLatLong1.push(geojson[0].Longitude);
+        //geojsonLatLong1.push(geojson[0].Latitude);
 
-        let geojsonLatLong2 = [];
-        geojsonLatLong2.push(geojson[1].Longitude);
-        geojsonLatLong2.push(geojson[1].Latitude);
+        //let geojsonLatLong2 = [];
+        //geojsonLatLong2.push(geojson[1].Longitude);
+        //geojsonLatLong2.push(geojson[1].Latitude);
 
         const geojson2 = {
             'type': 'FeatureCollection',
