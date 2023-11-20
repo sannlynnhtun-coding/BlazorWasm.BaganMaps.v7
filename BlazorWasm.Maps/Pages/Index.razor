@@ -1,4 +1,5 @@
 ﻿@page "/"
+@using Newtonsoft.Json
 @implements IDisposable
 
 <PageTitle>Bagan Map</PageTitle>
@@ -16,19 +17,63 @@
     </MudItem>
 </MudGrid> *@
 
+@* <PrimaryButton Text="Open Light Dismiss Panel" OnClick=@(() => lightDismissPanelOpen = true)/> *@
+@* <MudButton Variant="Variant.Text" OnClick="@(() => OpenDrawer(Anchor.End))">End</MudButton> *@
 <div id="map"></div>
+@* <MudPaper Height="400px" Width="100%"> *@
+@*     <MudContainer Fixed="true"> *@
+@*         <div id="map"></div> *@
+@*     </MudContainer> *@
+@* </MudPaper> *@
+@* <div id="map"></div> *@
 
-<MudDrawer @bind-Open="@open" Anchor="@anchor" Elevation="1" Variant="@DrawerVariant.Temporary">
-    <MudDrawerHeader>
-        <MudText Typo="Typo.h6">My App</MudText>
-    </MudDrawerHeader>
-    <MudNavMenu>
-        <MudNavLink Match="NavLinkMatch.All">Store</MudNavLink>
-        <MudNavLink Match="NavLinkMatch.All">Library</MudNavLink>
-        <MudNavLink Match="NavLinkMatch.All">Community</MudNavLink>
-    </MudNavMenu>
-</MudDrawer>
+@* <MudDrawer @bind-Open="@open" Anchor="@anchor" Elevation="1" Variant="@DrawerVariant.Temporary"> *@
+@*     <MudDrawerHeader> *@
+@*         <MudText Typo="Typo.h6">My App</MudText> *@
+@*     </MudDrawerHeader> *@
+@*     <MudNavMenu> *@
+@*         <MudNavLink Match="NavLinkMatch.All">Store</MudNavLink> *@
+@*         <MudNavLink Match="NavLinkMatch.All">Library</MudNavLink> *@
+@*         <MudNavLink Match="NavLinkMatch.All">Community</MudNavLink> *@
+@*     </MudNavMenu> *@
+@* </MudDrawer> *@
+
+
+<Panel IsOpen=@lightDismissPanelOpen
+       OnDismiss=@(() => lightDismissPanelOpen = !lightDismissPanelOpen)
+       Type=@((PanelType)Enum.Parse(typeof(PanelType), panelTypeSelected?.Key!))
+       CustomWidth=@customWidth
+       IsLightDismiss="true"
+       HeaderText="@(_head is null ? "" : _head.PagodaMmName)">
+    <NavigationTemplate>
+        @* <IconButton OnClick=@(() => lightDismissPanelOpen = false) *@
+        @*             IconName="navigation"/> *@
+    </NavigationTemplate>
+    <ChildContent>
+        <p>
+            @_detail.Description
+            @* <code> *@
+            @*     @if (_detail is not null) *@
+            @*     { *@
+            @*         @JsonConvert.SerializeObject(_detail, Formatting.Indented) *@
+            @*     } *@
+            @* </code> *@
+        </p>
+    </ChildContent>
+</Panel>
+
 @code {
+    bool lightDismissPanelOpen = false;
+
+    IDropdownOption? panelTypeSelected = new DropdownOption
+    {
+        Key = "Medium",
+        Text = "Medium",
+        ItemType = SelectableOptionMenuItemType.Normal
+    };
+
+    string customWidth = "500";
+
     bool open;
     Anchor anchor;
 
@@ -37,4 +82,5 @@
         open = true;
         this.anchor = anchor;
     }
+
 }

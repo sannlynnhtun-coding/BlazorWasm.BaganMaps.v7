@@ -7,8 +7,8 @@ window.loadMap = function (data, dotNetHelper) {
     const map = new mapboxgl.Map({
         container: 'map',
         // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
-        style: 'mapbox://styles/mapbox/streets-v12',
-        //style: 'mapbox://styles/mapbox/dark-v11',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        // style: 'mapbox://styles/mapbox/dark-v11',
         center: [94.905, 21.160],
         zoom: 13
     });
@@ -29,7 +29,7 @@ window.loadMap = function (data, dotNetHelper) {
         el.innerHTML = `<span style="position: absolute; margin-top: -28px; width: 200px;"><span class="badge text-bg-primary">1</span>${marker.PagodaMmName}</span>`;
 
         el.addEventListener('click', () => {
-            window.alert(marker.PagodaMmName);
+            console.log(marker.PagodaMmName);
             dotNetHelper.invokeMethodAsync('Detail', marker.Id);
         });
 
