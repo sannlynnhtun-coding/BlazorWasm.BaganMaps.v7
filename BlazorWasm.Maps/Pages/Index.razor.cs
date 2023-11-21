@@ -63,7 +63,7 @@ namespace BlazorWasm.Maps.Pages
                 .FirstOrDefault(x => x.TravelRouteId == travelRouteId);
             await _jsRuntime.InvokeVoidAsync(
                "loadMap",
-               JsonConvert.SerializeObject(_baganMapInfo.PagodaList.OrderBy(x=> x.Latitude).ToList()),
+               JsonConvert.SerializeObject(_baganMapInfo.PagodaList.ToList()),
                objRef);
         }
     }
