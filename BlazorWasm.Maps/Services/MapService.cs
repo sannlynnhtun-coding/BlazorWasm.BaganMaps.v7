@@ -18,7 +18,33 @@ namespace BlazorWasm.Maps.Services
 
         public List<TravelRouteModel> TravelRouteList()
         {
-            var dayOne = new List<string> { "26", "47", "19", "15", "29", "24", "7", "9", "11", "14", "30", "37", "10", "41", "48", "12", "13", "43", "42", "8", "40", "23", "36", "34", "5" };
+            var dayOne = new List<string> 
+            {
+                "1ba87a6f-0dd4-431b-ac71-82a235bf794b",
+                "1a0c01cc-8701-4a2c-b0b6-5c193135a463",
+                "8b180ad2-95dc-4a51-8e02-443f692f2948",
+                "2dbfca5f-074c-4073-a899-d6a05354504c",
+                "1de9b8bc-1440-4e1d-868a-d3296264760c",
+                "097d5820-c4ac-41e2-8775-7e904ced0107",
+                "801a782b-5d7e-413d-8359-dae33dfde64a",
+                "eac6f3d0-a5c8-4674-9000-00669a1a5972",
+                "9d109dd8-32f3-4722-a5df-a4e5990c3d18",
+                "ef1b92f1-48a8-4cfa-9133-ea5ce20daeac",
+                "27aa55d0-4116-4fa1-bffc-99d09501f26e",
+                "f4895e50-b0be-42e5-93e8-1070cce9320b",
+                "c9fffd35-23f0-4fda-8242-580708082f0d",
+                "e25fe3ab-5174-4511-b6f2-0a6ad6602b5c",
+                "1519387c-84d1-4e1b-9718-ebfc1ba8714a",
+                "45f548f3-25ae-4715-b47a-feba44002c3d",
+                "7f26d0fb-cb1b-472e-b786-df31495e5f25",
+                "cc7ebc36-1863-4c9f-b84a-bf4b689ce346",
+                "3bb5dada-0590-437e-9424-e74d1aa76dd6",
+                "b9625d2b-7ad2-4102-afac-05d1d6a71ec1",
+                "73e997f5-c2cc-40e6-917f-390a2a2e2106",
+                "b2ddd7c1-c7a9-4cf3-92a8-96f38d5e4ad3",
+                "774da518-68f4-488c-a66a-d5b8712bfb33",
+                "1ba87a6f-0dd4-431b-ac71-82a235bf794b"
+            };
 
             List<TravelRouteModel> travelRoutes = new List<TravelRouteModel>();
 
@@ -26,17 +52,43 @@ namespace BlazorWasm.Maps.Services
             dayOneRouteData.TravelRouteId = "7C1DDEED-1B9E-4B54-8AE9-986BB44C42C1";
             dayOneRouteData.TravelRouteDescription = "မနက် ၈ နာရီမှာ ခရီးစထွက်ပြီးနောက် နေ့လည်ထမင်းစားနားချိန် ၁၂ နာရီဝန်းကျင် ပုဂံပြတိုက်နားမှာသုံးဆောင်ခါ ခဏတာအပန်းဖြေပြီး ထို့နောက်ပုဂံပြတိုက်ကနေစတင်ခရီးဆက်ပြီး ပြတိုက်အတွင်း၌ နားနားနေနေလည်ပတ်ပြီးနောက် ၂ နာရီဝန်းကျင်ပြန်လည်ထွက်ခွာပြီး အဆုံးမှာတော့ စူဠာမဏိစေတီ၌ ညနေခင်းနေဝင်ချိန်ကြည့်ပြီး အလှဓာတ်ပုံများရိုက်ခါ တစ်နေ့တာအတွက်နားဖို့အချိန်ကျပါပီ";
             //dayOneRouteData.PagodaList = BaganMapInfo.Where(x => dayOne.Contains(x.Id)).ToList();
+
             dayOneRouteData.PagodaList = new List<BaganMapInfoModel>();
 
             foreach (var dayOneRoute in dayOne)
             {
-                int index = Convert.ToInt32(dayOneRoute) + 1;
-                dayOneRouteData.PagodaList.Add(BaganMapInfo[index]);
+                //int index = Convert.ToInt32(dayOneRoute) + 1;
+                dayOneRouteData.PagodaList.Add(BaganMapInfo.FirstOrDefault(x=>x.Id == dayOneRoute));
             }
 
             travelRoutes.Add(dayOneRouteData);
 
-            var dayTwo = new List<string> { "4", "38", "33", "39", "2", "46", "3", "49", "51", "35", "6", "22", "25", "20", "16", "17", "27", "18", "44", "31", "32", "45", "21" };
+            var dayTwo = new List<string> 
+            { 
+                "4", 
+                "38", 
+                "33", 
+                "39", 
+                "2", 
+                "46", 
+                "3", 
+                "49", 
+                "51", 
+                "35", 
+                "6", 
+                "22", 
+                "25", 
+                "20", 
+                "16", 
+                "17", 
+                "27", 
+                "18", 
+                "44", 
+                "31", 
+                "32", 
+                "45", 
+                "21" 
+            };
 
             var dayTwoRouteData = new TravelRouteModel();
             dayTwoRouteData.TravelRouteId = "5381343D-1F64-4D39-849A-E889C554B5E6";

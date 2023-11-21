@@ -19,8 +19,8 @@ namespace BlazorWasm.Maps.Pages
                 objRef = DotNetObjectReference.Create(this);
                 await Task.Delay(TimeSpan.FromSeconds(2));
                 //await LoadMap();
-                await GetRoute("7C1DDEED-1B9E-4B54-8AE9-986BB44C42C1"); // day 1
-                //await GetRoute("5381343D-1F64-4D39-849A-E889C554B5E6"); // day 2
+                //await GetRoute("7C1DDEED-1B9E-4B54-8AE9-986BB44C42C1"); // day 1
+                await GetRoute("5381343D-1F64-4D39-849A-E889C554B5E6"); // day 2
             }
         }
 
@@ -56,7 +56,7 @@ namespace BlazorWasm.Maps.Pages
                 .FirstOrDefault(x => x.TravelRouteId == travelRouteId);
             await _jsRuntime.InvokeVoidAsync(
                "loadMap",
-               JsonConvert.SerializeObject(_baganMapInfo.PagodaList.OrderBy(x=> x.Latitude).ToList()),
+               JsonConvert.SerializeObject(_baganMapInfo.PagodaList.ToList()),
                objRef);
         }
     }
