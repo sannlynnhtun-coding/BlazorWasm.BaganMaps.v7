@@ -95,8 +95,7 @@ namespace BlazorWasm.Maps.Services
 
             foreach (var dayTwoRoute in dayTwo)
             {
-                int index = Convert.ToInt32(dayTwoRoute) + 1;
-                dayTwoRouteData.PagodaList.Add(BaganMapInfo[index]);
+                dayTwoRouteData.PagodaList.Add(BaganMapInfo.FirstOrDefault(x => x.Id == dayTwoRoute));
             }
 
             travelRoutes.Add(dayTwoRouteData);
