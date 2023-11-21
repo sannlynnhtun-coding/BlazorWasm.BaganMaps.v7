@@ -41,8 +41,9 @@ namespace BlazorWasm.Maps.Pages
         [JSInvokable]
         public void Detail(string id)
         {
-            _head = _baganMapInfo.FirstOrDefault(x => x.Id == id);
-            _detail = _baganMapInfoDetail.FirstOrDefault(x => x.Id == id);
+            Console.WriteLine(id);
+            _head = _mapService.BaganMapInfo.FirstOrDefault(x => x.Id == id);
+            _detail = _mapService.BaganMapInfoDetail.FirstOrDefault(x => x.Id == id);
             Console.WriteLine(JsonConvert.SerializeObject(_detail));
             lightDismissPanelOpen = true;
             StateHasChanged();

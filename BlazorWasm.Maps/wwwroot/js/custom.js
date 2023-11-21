@@ -15,8 +15,11 @@ window.loadMap = function (data, dotNetHelper) {
 
     let geojsonLatLongList = [];
 
+    var count = 0;
     // Add markers to the map.
     for (const marker of geojson) {
+        if (marker.Longitude == 0 || marker.Latitude == 0) continue;
+
         // Create a DOM element for each marker.
         const el = document.createElement('div');
         const width = 40;
@@ -26,13 +29,21 @@ window.loadMap = function (data, dotNetHelper) {
         el.style.width = `${width}px`;
         el.style.height = `${height}px`;
         el.style.backgroundSize = '100%';
-        el.innerHTML = `<span style="position: absolute; margin-top: -28px; width: 200px;"><span class="badge text-bg-primary">1</span>${marker.PagodaMmName}</span>`;
+        el.innerHTML = `
+        <span style="position: absolute; margin-top: -28px; width: 200px;">
+            <span class="badge text-bg-primary">
+                ${++count}
+            </span>
+            ${marker.PagodaMmName}
+        </span>`;
+
+        //const makerId = marker.Id;
+        //console.log({ count, makerId });
 
         el.addEventListener('click', () => {
             console.log(marker.PagodaMmName);
             dotNetHelper.invokeMethodAsync('Detail', marker.Id);
         });
-
 
         let coordinates = [];
         coordinates.push(marker.Longitude);
@@ -47,10 +58,11 @@ window.loadMap = function (data, dotNetHelper) {
         geojsonLatLong1.push(marker.Latitude);
 
         geojsonLatLongList.push(geojsonLatLong1);
-        
     }
+
     console.log("lat long list");
     console.log(geojsonLatLongList);
+
     map.on('load', function () {
         //let geojsonLatLong1 = [];
         //geojsonLatLong1.push(geojson[0].Longitude);
