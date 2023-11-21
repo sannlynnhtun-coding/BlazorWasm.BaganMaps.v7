@@ -1,21 +1,30 @@
 ﻿@page "/"
+@page "/{Id}"
 @using Newtonsoft.Json
 @implements IDisposable
 
 <PageTitle>Bagan Map</PageTitle>
-
+<MudLayout>
+    <MudAppBar Elevation="1" Dense="false" Color="Color.Dark">
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@ToggleDrawer" />
+        <MudSpacer />
+        <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit" Link="https://github.com/sannlynnhtun-coding/BlazorWasm.Maps" Target="_blank" />
+    </MudAppBar>
+    <MudDrawer @bind-Open="@open" Elevation="1" Variant="DrawerVariant.Responsive">
+        <MudNavMenu>
+            <MudNavLink Match="NavLinkMatch.All" Href="/" Icon="@Icons.Material.Filled.LibraryBooks">Home</MudNavLink>
+            @if (_travelRoute is not null)
+            {
+                @foreach (var item in _travelRoute)
+                {
+                    string url = "/" + item.TravelRouteId;
+                    <MudNavLink Match="NavLinkMatch.All" Href="@url" Icon="@Icons.Material.Filled.LibraryBooks">@item.TravelRouteName</MudNavLink>
+                }
+            }
+        </MudNavMenu>
+    </MudDrawer>
+</MudLayout>
 <div id="map"></div>
-
-@* <MudDrawer @bind-Open="@open" Anchor="@anchor" Elevation="1" Variant="@DrawerVariant.Temporary">
-    <MudDrawerHeader>
-        <MudText Typo="Typo.h6">My App</MudText>
-    </MudDrawerHeader>
-    <MudNavMenu>
-        <MudNavLink Match="NavLinkMatch.All">Store</MudNavLink>
-        <MudNavLink Match="NavLinkMatch.All">Library</MudNavLink>
-        <MudNavLink Match="NavLinkMatch.All">Community</MudNavLink>
-    </MudNavMenu>
-</MudDrawer> *@
 
 <Panel IsOpen=@lightDismissPanelOpen
        OnDismiss=@(() => lightDismissPanelOpen = !lightDismissPanelOpen)
@@ -24,23 +33,18 @@
        IsLightDismiss="true"
        HeaderText="@(_head is null ? "" : (_head.PagodaMmName + " - " + _head.Id))">
     <NavigationTemplate>
-        @* <IconButton OnClick=@(() => lightDismissPanelOpen = false) *@
-        @*             IconName="navigation"/> *@
     </NavigationTemplate>
     <ChildContent>
         <p>
             @_detail.Description
-            @* <code> *@
-            @*     @if (_detail is not null) *@
-            @*     { *@
-            @*         @JsonConvert.SerializeObject(_detail, Formatting.Indented) *@
-            @*     } *@
-            @* </code> *@
         </p>
     </ChildContent>
 </Panel>
 
 @code {
+    [Parameter]
+    public string Id { get; set; }
+
     bool lightDismissPanelOpen = false;
 
     IDropdownOption? panelTypeSelected = new DropdownOption
@@ -52,7 +56,7 @@
 
     string customWidth = "500";
 
-    bool open;
+    bool open = false;
     Anchor anchor;
 
     void OpenDrawer(Anchor anchor = Anchor.Start)
@@ -61,4 +65,8 @@
         this.anchor = anchor;
     }
 
+    void ToggleDrawer()
+    {
+        open = !open;
+    }
 }

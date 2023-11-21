@@ -12,15 +12,22 @@ namespace BlazorWasm.Maps.Pages
         private BaganMapInfoModel? _head;
         private BaganMapInfoDetailModel? _detail;
 
+        private List<TravelRouteModel> _travelRoute;
+
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
             {
                 objRef = DotNetObjectReference.Create(this);
                 await Task.Delay(TimeSpan.FromSeconds(2));
+
+                _travelRoute = _mapService.TravelRouteList();
+
                 //await LoadMap();
                 await GetRoute("7C1DDEED-1B9E-4B54-8AE9-986BB44C42C1"); // day 1
                 //await GetRoute("5381343D-1F64-4D39-849A-E889C554B5E6"); // day 2
+
+                StateHasChanged();
             }
         }
 

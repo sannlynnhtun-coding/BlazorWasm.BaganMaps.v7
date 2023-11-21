@@ -1,6 +1,6 @@
 window.loadMap = function (data, dotNetHelper) {
-    console.log(data);
-    console.log(dotNetHelper);
+    //console.log(data);
+    //console.log(dotNetHelper);
     mapboxgl.accessToken = 'pk.eyJ1Ijoic2Fubmx5bm5odHVuLWRldiIsImEiOiJjbG9ia2FoeGkwY25iMmpvNGJ4MDUyY3ZlIn0.FpDwK1yUPLSg_FPnLe_uzQ';
     const geojson = JSON.parse(data);
 
@@ -41,7 +41,7 @@ window.loadMap = function (data, dotNetHelper) {
         //console.log({ count, makerId });
 
         el.addEventListener('click', () => {
-            console.log(marker.PagodaMmName);
+            //console.log(marker.PagodaMmName);
             dotNetHelper.invokeMethodAsync('Detail', marker.Id);
         });
 
@@ -60,8 +60,8 @@ window.loadMap = function (data, dotNetHelper) {
         geojsonLatLongList.push(geojsonLatLong1);
     }
 
-    console.log("lat long list");
-    console.log(geojsonLatLongList);
+    //console.log("lat long list");
+    //console.log(geojsonLatLongList);
 
     map.on('load', function () {
         //let geojsonLatLong1 = [];

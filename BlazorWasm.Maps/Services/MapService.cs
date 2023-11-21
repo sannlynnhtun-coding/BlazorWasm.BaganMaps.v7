@@ -24,6 +24,7 @@ namespace BlazorWasm.Maps.Services
 
             var dayOneRouteData = new TravelRouteModel();
             dayOneRouteData.TravelRouteId = "7C1DDEED-1B9E-4B54-8AE9-986BB44C42C1";
+            dayOneRouteData.TravelRouteName = "ခရီးစဥ် - ၁";
             dayOneRouteData.TravelRouteDescription = "မနက် ၈ နာရီမှာ ခရီးစထွက်ပြီးနောက် နေ့လည်ထမင်းစားနားချိန် ၁၂ နာရီဝန်းကျင် ပုဂံပြတိုက်နားမှာသုံးဆောင်ခါ ခဏတာအပန်းဖြေပြီး ထို့နောက်ပုဂံပြတိုက်ကနေစတင်ခရီးဆက်ပြီး ပြတိုက်အတွင်း၌ နားနားနေနေလည်ပတ်ပြီးနောက် ၂ နာရီဝန်းကျင်ပြန်လည်ထွက်ခွာပြီး အဆုံးမှာတော့ စူဠာမဏိစေတီ၌ ညနေခင်းနေဝင်ချိန်ကြည့်ပြီး အလှဓာတ်ပုံများရိုက်ခါ တစ်နေ့တာအတွက်နားဖို့အချိန်ကျပါပီ";
             //dayOneRouteData.PagodaList = BaganMapInfo.Where(x => dayOne.Contains(x.Id)).ToList();
             dayOneRouteData.PagodaList = new List<BaganMapInfoModel>();
@@ -40,6 +41,7 @@ namespace BlazorWasm.Maps.Services
 
             var dayTwoRouteData = new TravelRouteModel();
             dayTwoRouteData.TravelRouteId = "5381343D-1F64-4D39-849A-E889C554B5E6";
+            dayTwoRouteData.TravelRouteName = "ခရီးစဥ် - ၂";
             dayTwoRouteData.TravelRouteDescription = "မနက် ၈ နာရီမှာ ခရီးစထွက်ပြီးနောက် နေ့လည်ထမင်းစားနားချိန် ၁၂ နာရီဝန်းကျင် မင်္ဂလာစေတီဘုရားနားမှာသုံးဆောင်ခါ ခဏတာအပန်းဖြေပြီး ထို့နောက်ဂူပြောက်ကြီးဘုရားကနေစတင်ခရီးဆက်ပြီး ဂူအတွင်း၌ နားနားနေနေလည်ပတ်ပြီးနောက် ၂ နာရီဝန်းကျင်ပြန်လည်ထွက်ခွာပြီး အဆုံးမှာတော့ စိမ်းညှက်ညီမဘုရား၌ တနေ့တာကုန်ဆုံးခါ ညနေခင်းနေဝင်ချိန်ကြည့်ပြီး အလှဓာတ်ပုံများရိုက်ခါခရီးစဥ်ပြီးဆုံးပါပီ";
             dayTwoRouteData.PagodaList = new List<BaganMapInfoModel>();
 
