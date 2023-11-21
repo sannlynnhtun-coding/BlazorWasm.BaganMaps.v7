@@ -1,6 +1,4 @@
 window.loadMap = function (data, dotNetHelper) {
-    //console.log(data);
-    //console.log(dotNetHelper);
     mapboxgl.accessToken = 'pk.eyJ1Ijoic2Fubmx5bm5odHVuLWRldiIsImEiOiJjbG9ia2FoeGkwY25iMmpvNGJ4MDUyY3ZlIn0.FpDwK1yUPLSg_FPnLe_uzQ';
     const geojson = JSON.parse(data);
 
@@ -10,7 +8,7 @@ window.loadMap = function (data, dotNetHelper) {
         style: 'mapbox://styles/mapbox/streets-v11',
         // style: 'mapbox://styles/mapbox/dark-v11',
         center: [94.905, 21.160],
-        zoom: 13
+        zoom: 11
     });
 
     let geojsonLatLongList = [];
@@ -40,11 +38,7 @@ window.loadMap = function (data, dotNetHelper) {
                 </span>`;
         }
 
-        //const makerId = marker.Id;
-        //console.log({ count, makerId });
-
         el.addEventListener('click', () => {
-            //console.log(marker.PagodaMmName);
             dotNetHelper.invokeMethodAsync('Detail', marker.Id);
         });
 
@@ -63,17 +57,7 @@ window.loadMap = function (data, dotNetHelper) {
         geojsonLatLongList.push(geojsonLatLong1);
     }
 
-    //console.log("lat long list");
-    //console.log(geojsonLatLongList);
-
     map.on('load', function () {
-        //let geojsonLatLong1 = [];
-        //geojsonLatLong1.push(geojson[0].Longitude);
-        //geojsonLatLong1.push(geojson[0].Latitude);
-
-        //let geojsonLatLong2 = [];
-        //geojsonLatLong2.push(geojson[1].Longitude);
-        //geojsonLatLong2.push(geojson[1].Latitude);
 
         const geojson2 = {
             'type': 'FeatureCollection',
@@ -83,12 +67,6 @@ window.loadMap = function (data, dotNetHelper) {
                     'geometry': {
                         'type': 'LineString',
                         'coordinates': geojsonLatLongList
-                        //'coordinates': [
-                        //    geojsonLatLongList
-                        //    //geojsonLatLong1,
-                        //    //geojsonLatLong2,
-                        //    // Add more coordinates as needed
-                        //]
                     }
                 },
                 // Add more features as needed

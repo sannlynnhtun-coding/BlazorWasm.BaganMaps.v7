@@ -19,15 +19,12 @@ namespace BlazorWasm.Maps.Pages
             if (firstRender)
             {
                 objRef = DotNetObjectReference.Create(this);
-                await Task.Delay(TimeSpan.FromSeconds(2));
 
                 _travelRoute = _mapService.TravelRouteList();
 
-                //await LoadMap();
-                await GetRoute("7C1DDEED-1B9E-4B54-8AE9-986BB44C42C1"); // day 1
+                await LoadMap();
+                //await GetRoute("7C1DDEED-1B9E-4B54-8AE9-986BB44C42C1"); // day 1
                 //await GetRoute("5381343D-1F64-4D39-849A-E889C554B5E6"); // day 2
-
-                StateHasChanged();
             }
         }
 
@@ -37,7 +34,7 @@ namespace BlazorWasm.Maps.Pages
             _baganMapInfoDetail = _mapService.BaganMapInfoDetail;
             await _jsRuntime.InvokeVoidAsync(
                 "loadMap",
-                JsonConvert.SerializeObject(_baganMapInfo), 
+                JsonConvert.SerializeObject(_baganMapInfo),
                 objRef);
         }
 
@@ -59,12 +56,23 @@ namespace BlazorWasm.Maps.Pages
 
         private async Task GetRoute(string travelRouteId)
         {
+            await Task.Delay(TimeSpan.FromMilliseconds(500));
+            if (travelRouteId is null)
+            {
+                await LoadMap();
+                return;
+            }
             var _baganMapInfo = _mapService.TravelRouteList()
                 .FirstOrDefault(x => x.TravelRouteId == travelRouteId);
             await _jsRuntime.InvokeVoidAsync(
                "loadMap",
                JsonConvert.SerializeObject(_baganMapInfo.PagodaList.ToList()),
                objRef);
+        }
+
+        protected override async Task OnParametersSetAsync()
+        {
+            await GetRoute(Id);
         }
     }
 }
