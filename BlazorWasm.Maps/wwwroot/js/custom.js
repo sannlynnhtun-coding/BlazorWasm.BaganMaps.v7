@@ -47,8 +47,10 @@ window.loadMap = function (data, dotNetHelper) {
         geojsonLatLong1.push(marker.Latitude);
 
         geojsonLatLongList.push(geojsonLatLong1);
+        
     }
-
+    console.log("lat long list");
+    console.log(geojsonLatLongList);
     map.on('load', function () {
         //let geojsonLatLong1 = [];
         //geojsonLatLong1.push(geojson[0].Longitude);
