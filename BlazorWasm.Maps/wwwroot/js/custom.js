@@ -17,7 +17,8 @@ window.loadMap = function (data, dotNetHelper) {
 
     var count = 0;
     // Add markers to the map.
-    for (const marker of geojson) {
+    for (var i = 0; i < geojson.length; i++) {
+        const marker = geojson[i];
         if (marker.Longitude == 0 || marker.Latitude == 0) continue;
 
         // Create a DOM element for each marker.
@@ -29,13 +30,15 @@ window.loadMap = function (data, dotNetHelper) {
         el.style.width = `${width}px`;
         el.style.height = `${height}px`;
         el.style.backgroundSize = '100%';
-        el.innerHTML = `
-        <span style="position: absolute; margin-top: -28px; width: 200px;">
-            <span class="badge text-bg-primary">
-                ${++count}
-            </span>
-            ${marker.PagodaMmName}
-        </span>`;
+        if (i !== geojson.length - 1) {
+            el.innerHTML = `
+                <span style="position: absolute; margin-top: -28px; width: 200px;">
+                    <span class="badge text-bg-primary">
+                        ${++count}
+                    </span>
+                    ${marker.PagodaMmName}
+                </span>`;
+        }
 
         //const makerId = marker.Id;
         //console.log({ count, makerId });
