@@ -24,8 +24,8 @@ namespace BlazorWasm.Maps.Pages
                 _travelRoute = _mapService.TravelRouteList();
 
                 //await LoadMap();
-                await GetRoute("7C1DDEED-1B9E-4B54-8AE9-986BB44C42C1"); // day 1
-                //await GetRoute("5381343D-1F64-4D39-849A-E889C554B5E6"); // day 2
+                //await GetRoute("7C1DDEED-1B9E-4B54-8AE9-986BB44C42C1"); // day 1
+                await GetRoute("5381343D-1F64-4D39-849A-E889C554B5E6"); // day 2
 
                 StateHasChanged();
             }
