@@ -19,7 +19,6 @@ namespace BlazorWasm.Maps.Pages
             if (firstRender)
             {
                 objRef = DotNetObjectReference.Create(this);
-                await Task.Delay(TimeSpan.FromSeconds(2));
 
                 _travelRoute = _mapService.TravelRouteList();
 
@@ -37,7 +36,7 @@ namespace BlazorWasm.Maps.Pages
             _baganMapInfoDetail = _mapService.BaganMapInfoDetail;
             await _jsRuntime.InvokeVoidAsync(
                 "loadMap",
-                JsonConvert.SerializeObject(_baganMapInfo), 
+                JsonConvert.SerializeObject(_baganMapInfo),
                 objRef);
         }
 
@@ -59,12 +58,23 @@ namespace BlazorWasm.Maps.Pages
 
         private async Task GetRoute(string travelRouteId)
         {
+            await Task.Delay(TimeSpan.FromMilliseconds(500));
+            if (travelRouteId is null)
+            {
+                await LoadMap();
+                return;
+            }
             var _baganMapInfo = _mapService.TravelRouteList()
                 .FirstOrDefault(x => x.TravelRouteId == travelRouteId);
             await _jsRuntime.InvokeVoidAsync(
                "loadMap",
                JsonConvert.SerializeObject(_baganMapInfo.PagodaList.ToList()),
                objRef);
+        }
+
+        protected override async Task OnParametersSetAsync()
+        {
+            await GetRoute(Id);
         }
     }
 }
