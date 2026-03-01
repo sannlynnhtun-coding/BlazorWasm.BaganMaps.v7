@@ -1,0 +1,58 @@
+name: Deploy to Vercel
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+
+    - name: Setup Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    - name: Install JS dependencies
+      run: |
+        cd BlazorWasm.MapsV2
+        npm install
+
+    - name: Run Build Scripts
+      run: |
+        cd BlazorWasm.MapsV2
+        npm run build
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Build
+      run: dotnet build --no-restore
+
+    - name: Publish WasmApp
+      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+      run: dotnet publish BlazorWasm.MapsV2/BlazorWasm.MapsV2.csproj -c Release -o release
+
+    - name: Copy vercel.json to publish output
+      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+      run: cp vercel.json release/wwwroot/
+
+    - name: Deploy to Vercel
+      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+      uses: amondnet/vercel-action@v25
+      with:
+        vercel-token: ${{ secrets.VERCEL_TOKEN }}
+        vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+        vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+        vercel-args: '--prod'
+        working-directory: ./release/wwwroot

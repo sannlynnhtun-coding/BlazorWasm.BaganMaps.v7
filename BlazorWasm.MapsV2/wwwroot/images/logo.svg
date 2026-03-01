@@ -1,0 +1,11 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Stylized Pagoda (Stupa) Silhouette -->
+  <path d="M32 4L38 16H26L32 4Z" fill="#F59E0B" />
+  <path d="M22 16H42V24H22V16Z" fill="#F59E0B" fill-opacity="0.9" />
+  <path d="M18 24H46V34H18V24Z" fill="#F59E0B" fill-opacity="0.8" />
+  <path d="M14 34H50V48H14V34Z" fill="#F59E0B" fill-opacity="0.7" />
+  <path d="M10 48H54V56C54 58.2091 52.2091 60 50 60H14C11.7909 60 10 58.2091 10 56V48Z" fill="#F59E0B" fill-opacity="0.6" />
+  
+  <!-- Map Pin Reference (Negative Space Circle) -->
+  <circle cx="32" cy="34" r="5" fill="white" />
+</svg>

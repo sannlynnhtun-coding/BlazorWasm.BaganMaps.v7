@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-background text-foreground transition-colors duration-300;
+  }
+}
+
+.marker {
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.marker:hover {
+    transform: scale(1.2);
+}
+
+#map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+}

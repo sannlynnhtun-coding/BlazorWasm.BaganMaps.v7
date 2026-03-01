@@ -1,0 +1,91 @@
+﻿@page "/"
+@page "/{Id}"
+@using Newtonsoft.Json
+@using BlazorWasm.MapsV2.Models
+@using BlazorWasm.MapsV2.Components
+@implements IDisposable
+
+<PageTitle>Bagan Map - Adventure</PageTitle>
+
+<div class="h-full w-full relative">
+    <div id="map" class="w-full h-full bg-muted/20"></div>
+    
+    <!-- Detail Sliding Panel -->
+    <PagodaDetail 
+        IsOpen="@isPanelOpen" 
+        Pagoda="@selectedPagoda" 
+        Detail="@selectedDetail" 
+        OnClose="@(() => isPanelOpen = false)" />
+</div>
+
+@code {
+    [Parameter] public string? Id { get; set; }
+
+    private bool isPanelOpen = false;
+    private BaganMapInfoModel? selectedPagoda;
+    private BaganMapInfoDetailModel? selectedDetail;
+    private DotNetObjectReference<Home>? objRef;
+    private List<TravelRouteModel>? travelRoutes;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            objRef = DotNetObjectReference.Create(this);
+            await _mapService.LoadDataAsync();
+            travelRoutes = _mapService.TravelRouteList();
+            
+            // Default route if none specified
+            if (string.IsNullOrEmpty(Id))
+            {
+                await GetRoute("5381343D-1F64-4D39-849A-E889C554B5E6"); // Default Day 2
+            }
+            else
+            {
+                await GetRoute(Id);
+            }
+            StateHasChanged();
+        }
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (objRef != null)
+        {
+            await GetRoute(Id);
+        }
+    }
+
+    private async Task GetRoute(string? travelRouteId)
+    {
+        // Add a small delay for smoother transition
+        await Task.Delay(200);
+        
+        if (string.IsNullOrEmpty(travelRouteId))
+        {
+            var allPagodas = _mapService.BaganMapInfo;
+            await _jsRuntime.InvokeVoidAsync("loadMap", JsonConvert.SerializeObject(allPagodas), objRef);
+            return;
+        }
+
+        var route = _mapService.TravelRouteList().FirstOrDefault(x => x.TravelRouteId == travelRouteId);
+        if (route != null)
+        {
+            await _jsRuntime.InvokeVoidAsync("loadMap", JsonConvert.SerializeObject(route.PagodaList.ToList()), objRef);
+        }
+    }
+
+    [JSInvokable]
+    public void Detail(string id)
+    {
+        selectedPagoda = _mapService.BaganMapInfo.FirstOrDefault(x => x.Id == id);
+        selectedDetail = _mapService.BaganMapInfoDetail.FirstOrDefault(x => x.Id == id);
+        isPanelOpen = true;
+        StateHasChanged();
+    }
+
+    public void Dispose()
+    {
+        objRef?.Dispose();
+    }
+}
