@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "npm run build:css",
     "build:css": "tailwindcss -i ./wwwroot/css/input.css -o ./wwwroot/css/app.css"
   },
   "keywords": [],
